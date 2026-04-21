@@ -203,7 +203,7 @@ async function ghlFetch(path) {
 async function fetchAllOpportunities() {
   let opps = [], startAfterId = null, page = 1;
   while (true) {
-    const url = `/opportunities/search?location_id=${CONFIG.locationId}&locationId=${CONFIG.locationId}&limit=100${startAfterId ? '&startAfterId=' + startAfterId : ''}`;
+    const url = `/opportunities/search?location_id=${CONFIG.locationId}&limit=100${startAfterId ? '&startAfterId=' + startAfterId : ''}`;
     const data = await ghlFetch(url);
     const raw = data.opportunities || [];
     const batch = raw.filter(o => !o.locationId || o.locationId === CONFIG.locationId);
@@ -211,13 +211,12 @@ async function fetchAllOpportunities() {
     setLoader(30 + Math.min(40, page * 8), `Carregando oportunidades... (${opps.length})`);
     if (raw.length < 100) break;
     startAfterId = raw[raw.length - 1].id;
-    page++;
-    if (page > 20) break;
+    page++; if (page > 20) break;
   }
   return opps;
 }
 async function fetchPipelines() {
-  const data = await ghlFetch(`/opportunities/pipelines?locationId=${CONFIG.locationId}&location_id=${CONFIG.locationId}`);
+  const data = await ghlFetch(`/opportunities/pipelines?locationId=${CONFIG.locationId}`);
   const all = data.pipelines || [];
   return all.filter(p => !p.locationId || p.locationId === CONFIG.locationId);
 }
@@ -263,18 +262,15 @@ function renderDashboard() {
   document.getElementById('kpiGanhas').textContent = wonVal > 0 ? fmtBRL(wonVal) : 'R$0';
   document.getElementById('kpiGanhasSub').textContent = won.length + ' venda(s) fechada(s)';
   document.getElementById('kpiIgnorou').textContent = ignorouCount;
-  document.getElementById('kpiIgnorouSub').textContent = opps.length > 0 ? (ignorouCount/opps.length*100).toFixed(0) + '% dos leads' : '—';
-  document.getElementById('kpiConv').textContent = txConv.toFixed(1) + '%';
+  document.getElementById('kpiIgnorouSub').textContent = opps.length > 0 ? (ignorouCount/opps.length*100).toFixed(0)+'% dos leads' : '—';
+  document.getElementById('kpiConv').textContent = txConv.toFixed(1)+'%';
   const badge = document.getElementById('dataBadge');
   badge.className = won.length === 0 ? 'badge badge-warn' : 'badge badge-ok';
   badge.textContent = won.length === 0 ? 'Ganhas não registradas' : won.length + ' venda(s) ganha(s)';
   renderFunnel(stageCounts, stageVals, open.length, won.length, opps.length, ignorouStageId);
   renderValorChart(stageVals, ignorouStageId);
-  renderOrigemChart(opps);
-  renderProdutoChart(opps);
-  renderVendedoras(opps, won);
-  renderPerdidosChart(lost);
-  renderConvSteps(stageCounts);
+  renderOrigemChart(opps); renderProdutoChart(opps);
+  renderVendedoras(opps, won); renderPerdidosChart(lost); renderConvSteps(stageCounts);
   const alertBox = document.getElementById('alertBox');
   if (ignorouCount > 0) {
     alertBox.style.display = 'flex';
@@ -286,11 +282,7 @@ function renderFunnel(stageCounts, stageVals, totalOpen, wonCount, totalAll, ign
   const sorted = Object.keys(stageCounts).map(sid => ({ sid, name: stageMap[sid]?.name || sid, count: stageCounts[sid], order: stageMap[sid]?.order ?? 99 })).sort((a, b) => a.order - b.order);
   const maxCount = Math.max(...sorted.map(s => s.count), 1);
   const COLORS = ['#85B7EB','#7F77DD','#E24B4A','#534AB7','#7F77DD','#1D9E75','#0F6E56','#EF9F27'];
-  document.getElementById('funnelWrap').innerHTML = sorted.map((s, i) => {
-    const pct = (s.count / maxCount * 100).toFixed(0);
-    const isAlert = s.sid === ignorouStageId;
-    return `<div class="funnel-row"><div class="funnel-meta"><span class="funnel-lbl ${isAlert?'alert':''}">${s.name}</span><span class="funnel-num">${s.count}</span></div><div class="funnel-track"><div class="funnel-fill" style="width:${pct}%;background:${isAlert?'#E24B4A':COLORS[i%COLORS.length]};"></div></div></div>`;
-  }).join('');
+  document.getElementById('funnelWrap').innerHTML = sorted.map((s, i) => { const pct = (s.count/maxCount*100).toFixed(0); const isAlert = s.sid === ignorouStageId; return `<div class="funnel-row"><div class="funnel-meta"><span class="funnel-lbl ${isAlert?'alert':''}">${s.name}</span><span class="funnel-num">${s.count}</span></div><div class="funnel-track"><div class="funnel-fill" style="width:${pct}%;background:${isAlert?'#E24B4A':COLORS[i%COLORS.length]};"></div></div></div>`; }).join('');
   document.getElementById('txGeral').textContent = totalAll > 0 ? (wonCount/totalAll*100).toFixed(1)+'%' : '—';
 }
 function renderValorChart(stageVals, ignorouStageId) {
@@ -300,8 +292,7 @@ function renderValorChart(stageVals, ignorouStageId) {
   charts.valor = new Chart(document.getElementById('valorChart'), { type: 'bar', indexAxis: 'y', data: { labels: entries.map(e => e.name), datasets: [{ data: entries.map(e => e.val), backgroundColor: colors, borderRadius: 5 }] }, options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { display: false }, tooltip: { callbacks: { label: c => ' ' + fmtBRL(c.raw) } } }, scales: { x: { grid: { color: 'rgba(0,0,0,0.04)' }, ticks: { font: { size: 10 }, color: '#888', callback: v => fmtBRL(v) } }, y: { grid: { display: false }, ticks: { font: { size: 11 }, color: '#888' } } } } });
 }
 function renderOrigemChart(opps) {
-  const counts = {};
-  opps.forEach(o => { const src = o.source || 'Sem origem'; counts[src] = (counts[src] || 0) + 1; });
+  const counts = {}; opps.forEach(o => { const src = o.source || 'Sem origem'; counts[src] = (counts[src] || 0) + 1; });
   const entries = Object.entries(counts).sort((a,b) => b[1]-a[1]).slice(0, 6);
   const COLORS = ['#534AB7','#0F6E56','#EF9F27','#185FA5','#E24B4A','#85B7EB'];
   const total = entries.reduce((s,e)=>s+e[1], 0);
@@ -310,8 +301,7 @@ function renderOrigemChart(opps) {
   document.getElementById('origemLegend').innerHTML = entries.map((e,i) => `<span class="legend-item"><span class="legend-dot" style="background:${COLORS[i]};"></span>${e[0]} ${total>0?(e[1]/total*100).toFixed(0):0}%</span>`).join('');
 }
 function renderProdutoChart(opps) {
-  const counts = {};
-  opps.forEach(o => { const p = detectProduct(o.name || ''); counts[p] = (counts[p] || 0) + 1; });
+  const counts = {}; opps.forEach(o => { const p = detectProduct(o.name || ''); counts[p] = (counts[p] || 0) + 1; });
   const entries = Object.entries(counts).sort((a,b)=>b[1]-a[1]);
   const colors = entries.map(e => CONFIG.productColors[e[0]] || '#B4B2A9');
   const total = entries.reduce((s,e)=>s+e[1], 0);
@@ -342,8 +332,7 @@ function renderVendedoras(opps, won) {
   }).join('');
 }
 function renderPerdidosChart(lost) {
-  const counts = {};
-  lost.forEach(o => { const r = o.lostReason || 'Sem motivo'; counts[r] = (counts[r] || 0) + 1; });
+  const counts = {}; lost.forEach(o => { const r = o.lostReason || 'Sem motivo'; counts[r] = (counts[r] || 0) + 1; });
   const entries = Object.entries(counts).sort((a,b)=>b[1]-a[1]).slice(0,6);
   if (entries.length === 0) { document.getElementById('perdidosChart').parentElement.innerHTML = '<p class="no-data">Nenhuma oportunidade perdida no período</p>'; return; }
   if (charts.perdidos) charts.perdidos.destroy();
@@ -352,13 +341,8 @@ function renderPerdidosChart(lost) {
 function renderConvSteps(stageCounts) {
   const sorted = Object.keys(stageCounts).map(sid => ({ name: stageMap[sid]?.name || sid, count: stageCounts[sid], order: stageMap[sid]?.order ?? 99 })).sort((a,b) => a.order - b.order).filter(s => s.count > 0);
   const COLORS = ['#534AB7','#7F77DD','#0F6E56','#1D9E75','#EF9F27','#185FA5'];
-  const cs = document.getElementById('convSteps');
-  cs.innerHTML = '';
-  for (let i = 0; i < sorted.length - 1; i++) {
-    const from = sorted[i], to = sorted[i+1];
-    const pct = from.count > 0 ? Math.min(100, (to.count / from.count * 100)) : 0;
-    cs.innerHTML += `<div class="conv-row"><div class="conv-meta"><span class="conv-lbl">${from.name} → ${to.name}</span><span class="conv-pct" style="color:${COLORS[i%COLORS.length]};">${pct.toFixed(0)}%</span></div><div class="conv-track"><div class="conv-fill" style="width:${pct}%;background:${COLORS[i%COLORS.length]};"></div></div></div>`;
-  }
+  const cs = document.getElementById('convSteps'); cs.innerHTML = '';
+  for (let i = 0; i < sorted.length - 1; i++) { const from = sorted[i], to = sorted[i+1]; const pct = from.count > 0 ? Math.min(100, (to.count/from.count*100)) : 0; cs.innerHTML += `<div class="conv-row"><div class="conv-meta"><span class="conv-lbl">${from.name} → ${to.name}</span><span class="conv-pct" style="color:${COLORS[i%COLORS.length]};">${pct.toFixed(0)}%</span></div><div class="conv-track"><div class="conv-fill" style="width:${pct}%;background:${COLORS[i%COLORS.length]};"></div></div></div>`; }
   if (!cs.innerHTML) cs.innerHTML = '<p class="no-data">Dados insuficientes</p>';
 }
 function filterByPeriod(days) { currentDays = parseInt(days); renderDashboard(); }
