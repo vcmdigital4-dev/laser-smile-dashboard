@@ -126,6 +126,7 @@
     </div>
   </div>
 
+
   <!-- ROW: Funil Iris + Valor por stage -->
   <div class="row2">
     <div class="card">
@@ -172,6 +173,14 @@
     <div class="card">
       <p class="card-title">Conversão entre stages · Íris</p>
       <div id="convSteps"></div>
+    </div>
+  </div>
+
+  <!-- ROW: Leads por dia da semana -->
+  <div style="margin-bottom:16px;">
+    <div class="card">
+      <p class="card-title">Leads por dia da semana · total acumulado</p>
+      <div style="position:relative;width:100%;height:130px;"><canvas id="diasChart" role="img" aria-label="Leads por dia da semana">Seg 55, Ter 50, Qua 44, Qui 45, Sex 25, Sáb 22, Dom 15.</canvas></div>
     </div>
   </div>
 
@@ -248,7 +257,6 @@
 <script>
 // FUNIL IRIS
 const funil = [
-  {l:'Entrada', v:1, c:'#85B7EB'},
   {l:'Lead Ignorou', v:77, alert:true},
   {l:'Lead Engajado', v:14, c:'#7F77DD'},
   {l:'Orçamento Enviado', v:17, c:'#534AB7'},
@@ -270,7 +278,7 @@ new Chart(document.getElementById('valorChart'),{
     labels:['Lead Ignorou','Orç. Enviado','Aguardando','Lead Engajado','Entrada'],
     datasets:[{data:[163450,53120,35970,5090,5090],backgroundColor:['#E24B4A','#534AB7','#1D9E75','#7F77DD','#85B7EB'],borderRadius:5}]
   },
-  options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false},tooltip:{callbacks:{label:c=>' R$'+c.raw.toLocaleString('pt-BR')}}},scales:{x:{grid:{color:'rgba(0,0,0,0.04)'},ticks:{font:{size:10},color:'#888',callback:v=>'R$'+(v/1000).toFixed(0)+'k'}},y:{grid:{display:false},ticks:{font:{size:11},color:'#888'}}}}
+  options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false},tooltip:{callbacks:{label:c=>' R$'+c.raw.toLocaleString('pt-BR')}}},scales:{x:{grid:{color:'rgba(0,0,0,0.04)'},ticks:{font:{size:10},color:'#888',callback:v=>v>=1000?'R$'+(v/1000).toFixed(0)+'k':'R$'+v}},y:{grid:{display:false},ticks:{font:{size:11},color:'#888'}}}}
 });
 
 // EVOLUÇÃO MENSAL
@@ -303,18 +311,27 @@ new Chart(document.getElementById('perdidosChart'),{
   options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false}},scales:{x:{grid:{color:'rgba(0,0,0,0.04)'},ticks:{font:{size:10},color:'#888'}},y:{grid:{display:false},ticks:{font:{size:10},color:'#888'}}}}
 });
 
+// LEADS POR DIA DA SEMANA
+new Chart(document.getElementById('diasChart'),{
+  type:'bar',
+  data:{
+    labels:['Seg','Ter','Qua','Qui','Sex','Sáb','Dom'],
+    datasets:[{data:[55,50,44,45,25,22,15],backgroundColor:['#534AB7','#534AB7','#534AB7','#534AB7','#7F77DD','#B5D4F4','#B5D4F4'],borderRadius:5}]
+  },
+  options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false}},scales:{x:{grid:{display:false},ticks:{font:{size:11},color:'#888'}},y:{grid:{color:'rgba(0,0,0,0.04)'},ticks:{font:{size:10},color:'#888'}}}}
+});
+
 // CONVERSÃO IRIS
 const convData = [
-  {from:'Entrada → Lead Ignorou', pct:100, c:'#E24B4A'},
-  {from:'Ignorou → Lead Engajado', pct:18, c:'#7F77DD'},
-  {from:'Lead Engajado → Orç. Enviado', pct:121, c:'#534AB7'},
-  {from:'Orç. Enviado → Aguardando', pct:53, c:'#1D9E75'},
-  {from:'Aguardando → Vendas (Ganhas)', pct:122, c:'#0F6E56'},
+  {from:'Ignorou → Lead Engajado', pct:18, c:'#7F77DD', note:'14 de 77'},
+  {from:'Lead Engajado → Orç. Enviado', pct:100, c:'#534AB7', note:'17 de 17'},
+  {from:'Orç. Enviado → Aguardando', pct:53, c:'#1D9E75', note:'9 de 17'},
+  {from:'Tx. conversão geral (Íris)', pct:9, c:'#0F6E56', note:'11 vendas / 129 contatos'},
 ];
 const cs = document.getElementById('convSteps');
 convData.forEach(c => {
   const bar = Math.min(100, c.pct);
-  cs.innerHTML += `<div class="conv-row"><div class="conv-meta"><span class="conv-lbl">${c.from}</span><span class="conv-pct" style="color:${c.c};">${c.pct}%</span></div><div class="conv-track"><div class="conv-fill" style="width:${bar}%;background:${c.c};"></div></div></div>`;
+  cs.innerHTML += `<div class="conv-row"><div class="conv-meta"><span class="conv-lbl">${c.from}</span><div style="display:flex;align-items:center;gap:8px;"><span style="font-size:10px;color:#9b9b97;">${c.note}</span><span class="conv-pct" style="color:${c.c};">${c.pct}%</span></div></div><div class="conv-track"><div class="conv-fill" style="width:${bar}%;background:${c.c};"></div></div></div>`;
 });
 </script>
 </body>
