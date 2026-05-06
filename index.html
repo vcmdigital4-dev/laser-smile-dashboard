@@ -11,46 +11,34 @@
     --bg: #f5f5f3; --surface: #ffffff; --border: rgba(0,0,0,0.08);
     --text-primary: #1a1a1a; --text-secondary: #6b6b68; --text-muted: #9b9b97;
     --radius: 10px; --purple: #534AB7; --purple-light: #EEEDFE;
-    --blue: #185FA5; --teal: #0F6E56; --red: #A32D2D; --amber: #854F0B; --green: #1D9E75;
+    --blue: #185FA5; --teal: #0F6E56; --red: #A32D2D; --amber: #854F0B;
   }
   body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; background: var(--bg); color: var(--text-primary); min-height: 100vh; padding: 24px; }
-  #loadingScreen { position: fixed; inset: 0; background: #f5f5f3; display: flex; flex-direction: column; align-items: center; justify-content: center; z-index: 999; gap: 16px; }
-  .loader-logo { font-size: 22px; font-weight: 600; color: var(--purple); }
-  .loader-sub { font-size: 13px; color: var(--text-secondary); }
-  .loader-bar { width: 220px; height: 4px; background: #e0e0e0; border-radius: 4px; overflow: hidden; }
-  .loader-fill { height: 100%; width: 0%; background: var(--purple); border-radius: 4px; transition: width 0.4s ease; }
-  #errorScreen { display: none; position: fixed; inset: 0; background: #f5f5f3; align-items: center; justify-content: center; flex-direction: column; gap: 12px; z-index: 999; }
-  .error-box { background: #fff; border: 0.5px solid #F09595; border-radius: 12px; padding: 24px 32px; max-width: 480px; text-align: center; }
-  .error-box h2 { font-size: 16px; font-weight: 500; color: #A32D2D; margin-bottom: 8px; }
-  .error-box p { font-size: 13px; color: var(--text-secondary); line-height: 1.6; }
-  .error-code { font-family: monospace; font-size: 11px; background: #f5f5f3; padding: 8px; border-radius: 6px; margin-top: 12px; color: var(--text-secondary); }
-  #dashboard { display: none; max-width: 1280px; margin: 0 auto; }
+  #dashboard { max-width: 1280px; margin: 0 auto; }
   .db-header { display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 20px; flex-wrap: wrap; gap: 12px; }
   .db-eyebrow { font-size: 11px; color: var(--text-secondary); text-transform: uppercase; letter-spacing: .12em; margin-bottom: 4px; }
   .db-title { font-size: 22px; font-weight: 500; color: var(--text-primary); }
   .db-controls { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
   .badge { font-size: 11px; padding: 5px 12px; border-radius: 20px; font-weight: 500; }
-  .badge-warn { background: #EF9F27; color: #fff; }
   .badge-ok { background: #0F6E56; color: #fff; }
-  .db-updated { font-size: 11px; color: var(--text-muted); }
-  select { font-size: 12px; padding: 6px 10px; border: 0.5px solid var(--border); border-radius: 8px; background: var(--surface); color: var(--text-primary); cursor: pointer; }
-  .btn-refresh { font-size: 12px; padding: 6px 14px; border: 0.5px solid var(--border); border-radius: 8px; background: var(--surface); color: var(--text-primary); cursor: pointer; }
+  .badge-info { background: var(--purple); color: #fff; }
   .kgrid { display: grid; grid-template-columns: repeat(5, minmax(0,1fr)); gap: 10px; margin-bottom: 20px; }
   .kcard { border-radius: var(--radius); padding: 16px; color: #fff; }
   .kcard-label { font-size: 10px; text-transform: uppercase; letter-spacing: .1em; margin-bottom: 8px; opacity: .85; font-weight: 500; }
   .kcard-val { font-size: 26px; font-weight: 500; margin-bottom: 4px; line-height: 1; }
   .kcard-sub { font-size: 10px; opacity: .8; }
-  .k-purple { background: var(--purple); } .k-blue { background: var(--blue); }
-  .k-teal { background: var(--teal); } .k-red { background: var(--red); } .k-amber { background: var(--amber); }
+  .k-purple{background:var(--purple);} .k-blue{background:var(--blue);} .k-teal{background:var(--teal);} .k-red{background:var(--red);} .k-amber{background:var(--amber);}
   .row2 { display: grid; grid-template-columns: 1fr 2fr; gap: 12px; margin-bottom: 16px; }
   .row3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 12px; margin-bottom: 16px; }
-  .row4 { display: grid; grid-template-columns: 1.6fr 1fr; gap: 12px; margin-bottom: 16px; }
+  .row4 { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 16px; }
+  .row5 { display: grid; grid-template-columns: 1.4fr 1fr 1fr; gap: 12px; margin-bottom: 16px; }
   .card { background: var(--surface); border: 0.5px solid var(--border); border-radius: var(--radius); padding: 18px 20px; }
   .card-title { font-size: 10px; text-transform: uppercase; letter-spacing: .1em; color: var(--text-secondary); margin-bottom: 14px; font-weight: 500; }
+  .card-note { font-size: 10px; color: var(--text-muted); font-style: italic; margin-bottom: 14px; margin-top: -10px; }
   .funnel-row { margin-bottom: 10px; }
   .funnel-meta { display: flex; justify-content: space-between; align-items: center; margin-bottom: 3px; }
   .funnel-lbl { font-size: 11px; color: var(--text-secondary); }
-  .funnel-lbl.alert { color: #A32D2D; font-weight: 500; }
+  .funnel-lbl.alert { color: var(--red); font-weight: 500; }
   .funnel-num { font-size: 12px; font-weight: 500; color: var(--text-primary); }
   .funnel-track { height: 7px; background: #f0f0ee; border-radius: 4px; overflow: hidden; }
   .funnel-fill { height: 100%; border-radius: 4px; }
@@ -70,11 +58,6 @@
   .vv { font-size: 11px; font-weight: 500; color: var(--text-primary); }
   .vdivider { height: 0.5px; background: var(--border); margin: 10px 0; }
   .vsection { font-size: 10px; text-transform: uppercase; letter-spacing: .08em; color: var(--text-secondary); margin-bottom: 8px; font-weight: 500; }
-  .prod-row { display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px; }
-  .prod-name { display: flex; align-items: center; gap: 6px; font-size: 11px; color: var(--text-primary); }
-  .prod-dot { width: 7px; height: 7px; border-radius: 50%; display: inline-block; }
-  .prod-val { font-size: 11px; font-weight: 500; }
-  .prod-qty { font-size: 10px; color: var(--text-muted); }
   .receita-box { background: var(--purple-light); border-radius: 8px; padding: 10px 14px; display: flex; justify-content: space-between; align-items: center; margin-top: 10px; }
   .receita-lbl { font-size: 10px; text-transform: uppercase; letter-spacing: .08em; color: var(--purple); font-weight: 500; }
   .receita-val { font-size: 16px; font-weight: 500; color: #3C3489; }
@@ -87,266 +70,252 @@
   .legend { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 10px; }
   .legend-item { display: flex; align-items: center; gap: 5px; font-size: 11px; color: var(--text-secondary); }
   .legend-dot { width: 9px; height: 9px; border-radius: 50%; display: inline-block; }
+  .summary-row { display: flex; justify-content: space-between; padding: 10px 0; border-bottom: 0.5px solid var(--border); }
+  .summary-row:last-child { border-bottom: none; }
+  .summary-k { font-size: 12px; color: var(--text-secondary); }
+  .summary-v { font-size: 13px; font-weight: 500; }
   .alert-box { background: var(--red); border-radius: var(--radius); padding: 16px 20px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px; margin-bottom: 4px; }
   .alert-title { font-size: 11px; text-transform: uppercase; letter-spacing: .08em; color: #fff; font-weight: 500; margin-bottom: 3px; opacity: .9; }
   .alert-text { font-size: 12px; color: #fff; opacity: .85; }
   .alert-btn { font-size: 12px; padding: 8px 18px; background: rgba(255,255,255,.15); border: 0.5px solid rgba(255,255,255,.4); color: #fff; border-radius: 8px; cursor: pointer; }
-  .no-data { font-size: 11px; color: var(--text-muted); text-align: center; padding: 20px; }
-  @media (max-width: 900px) { .kgrid { grid-template-columns: repeat(3, 1fr); } .row2, .row3, .row4 { grid-template-columns: 1fr; } }
-  @media (max-width: 600px) { body { padding: 12px; } .kgrid { grid-template-columns: repeat(2, 1fr); } }
+  @media (max-width: 900px) { .kgrid{grid-template-columns:repeat(3,1fr);} .row2,.row3,.row4,.row5{grid-template-columns:1fr;} }
+  @media (max-width: 600px) { body{padding:12px;} .kgrid{grid-template-columns:repeat(2,1fr);} }
 </style>
 </head>
 <body>
-<div id="loadingScreen">
-  <div class="loader-logo">Laser Smile</div>
-  <div class="loader-sub" id="loadingMsg">Conectando ao GHL...</div>
-  <div class="loader-bar"><div class="loader-fill" id="loaderFill"></div></div>
-</div>
-<div id="errorScreen">
-  <div class="error-box">
-    <h2>Erro ao carregar dados</h2>
-    <p>Não foi possível conectar à API do GoHighLevel.</p>
-    <div class="error-code" id="errorDetail"></div>
-    <button class="btn-refresh" style="margin-top:14px;" onclick="location.reload()">Tentar novamente</button>
-  </div>
-</div>
 <div id="dashboard">
+
+  <!-- HEADER -->
   <div class="db-header">
     <div>
       <p class="db-eyebrow">Laser Smile · Indústria de Saúde</p>
       <p class="db-title">Performance de vendas — pipeline laser</p>
     </div>
     <div class="db-controls">
-      <span class="badge" id="dataBadge">Carregando...</span>
-      <span class="db-updated" id="updatedAt"></span>
-      <select id="periodoSelect" onchange="filterByPeriod(this.value)">
-        <option value="30">Últimos 30 dias</option>
-        <option value="60">Últimos 60 dias</option>
-        <option value="90">Últimos 90 dias</option>
-        <option value="0">Todos</option>
-      </select>
-      <button class="btn-refresh" onclick="loadData()">↻ Atualizar</button>
+      <span class="badge badge-ok">69 vendas ganhas</span>
+      <span class="badge badge-info">Mar — Mai 2026</span>
     </div>
   </div>
+
+  <!-- KPIs -->
   <div class="kgrid">
-    <div class="kcard k-purple"><p class="kcard-label">Pipeline total</p><p class="kcard-val" id="kpiPipeline">—</p><p class="kcard-sub" id="kpiPipelineSub">oportunidades abertas</p></div>
-    <div class="kcard k-blue"><p class="kcard-label">Total de leads</p><p class="kcard-val" id="kpiLeads">—</p><p class="kcard-sub" id="kpiLeadsSub">—</p></div>
-    <div class="kcard k-teal"><p class="kcard-label">Receita ganha</p><p class="kcard-val" id="kpiGanhas">—</p><p class="kcard-sub" id="kpiGanhasSub">vendas fechadas</p></div>
-    <div class="kcard k-red"><p class="kcard-label">Lead ignorou ⚠</p><p class="kcard-val" id="kpiIgnorou">—</p><p class="kcard-sub" id="kpiIgnorouSub">gargalo crítico</p></div>
-    <div class="kcard k-amber"><p class="kcard-label">Tx. conversão</p><p class="kcard-val" id="kpiConv">—</p><p class="kcard-sub">leads → ganhos</p></div>
+    <div class="kcard k-purple">
+      <p class="kcard-label">Pipeline Íris</p>
+      <p class="kcard-val">R$262,7K</p>
+      <p class="kcard-sub">118 oportunidades abertas</p>
+    </div>
+    <div class="kcard k-blue">
+      <p class="kcard-label">Total de leads</p>
+      <p class="kcard-val">289</p>
+      <p class="kcard-sub">256 ativos · 33 perdidos</p>
+    </div>
+    <div class="kcard k-teal">
+      <p class="kcard-label">Receita total ganha</p>
+      <p class="kcard-val">R$63,6K</p>
+      <p class="kcard-sub">Íris R$44,9K · Elaine R$18,7K</p>
+    </div>
+    <div class="kcard k-red">
+      <p class="kcard-label">Lead ignorou ⚠</p>
+      <p class="kcard-val">77</p>
+      <p class="kcard-sub">60% dos leads da Íris</p>
+    </div>
+    <div class="kcard k-amber">
+      <p class="kcard-label">Tx. conversão Íris</p>
+      <p class="kcard-val">8,5%</p>
+      <p class="kcard-sub">11 vendas / 129 contatos</p>
+    </div>
   </div>
+
+  <!-- ROW: Funil Iris + Valor por stage -->
   <div class="row2">
     <div class="card">
-      <p class="card-title">Funil de vendas · stages</p>
+      <p class="card-title">Funil de vendas · Íris</p>
+      <p class="card-note">Elaine excluída — entrada direta no fechamento</p>
       <div id="funnelWrap"></div>
-      <div class="funnel-footer"><span class="funnel-footer-label">Tx. geral (entrada → ganhos)</span><span class="funnel-footer-val" id="txGeral">—</span></div>
+      <div class="funnel-footer">
+        <span class="funnel-footer-label">Tx. conversão Íris</span>
+        <span class="funnel-footer-val">8,5%</span>
+      </div>
     </div>
     <div class="card">
       <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:14px;flex-wrap:wrap;gap:6px;">
-        <p class="card-title" style="margin:0;">Valor acumulado por stage</p>
+        <p class="card-title" style="margin:0;">Valor por stage · Íris</p>
         <div class="legend" style="margin:0;">
           <span class="legend-item"><span class="legend-dot" style="background:#534AB7;border-radius:2px;"></span>Alto valor</span>
           <span class="legend-item"><span class="legend-dot" style="background:#185FA5;border-radius:2px;"></span>Médio</span>
           <span class="legend-item"><span class="legend-dot" style="background:#E24B4A;border-radius:2px;"></span>Ignorados</span>
         </div>
       </div>
-      <div style="position:relative;width:100%;height:200px;"><canvas id="valorChart" role="img" aria-label="Valor por stage">Carregando...</canvas></div>
+      <div style="position:relative;width:100%;height:200px;"><canvas id="valorChart"></canvas></div>
     </div>
   </div>
+
+  <!-- ROW: Evolução mensal + Origem + Conversão Iris -->
   <div class="row3">
     <div class="card">
-      <p class="card-title">Origem dos leads</p>
-      <div style="position:relative;width:100%;height:160px;"><canvas id="origemChart" role="img" aria-label="Leads por canal">Carregando...</canvas></div>
-      <div class="legend" id="origemLegend"></div>
+      <p class="card-title">Evolução mensal · leads e vendas</p>
+      <div style="position:relative;width:100%;height:180px;"><canvas id="evolucaoChart"></canvas></div>
+      <div class="legend">
+        <span class="legend-item"><span class="legend-dot" style="background:#B5D4F4;"></span>Leads</span>
+        <span class="legend-item"><span class="legend-dot" style="background:#0F6E56;"></span>Ganhas</span>
+      </div>
     </div>
     <div class="card">
-      <p class="card-title">Distribuição por produto</p>
-      <div style="position:relative;width:100%;height:160px;"><canvas id="produtoChart" role="img" aria-label="Por produto">Carregando...</canvas></div>
-      <div class="legend" id="produtoLegend"></div>
+      <p class="card-title">Origem dos leads</p>
+      <div style="position:relative;width:100%;height:160px;"><canvas id="origemChart"></canvas></div>
+      <div class="legend">
+        <span class="legend-item"><span class="legend-dot" style="background:#534AB7;"></span>Instagram 85%</span>
+        <span class="legend-item"><span class="legend-dot" style="background:#EF9F27;"></span>Facebook 9%</span>
+        <span class="legend-item"><span class="legend-dot" style="background:#0F6E56;"></span>Meta Ads 6%</span>
+      </div>
     </div>
-    <div class="card"><p class="card-title">Vendedoras · leads ativos</p><div id="vendedorasWrap"></div></div>
+    <div class="card">
+      <p class="card-title">Conversão entre stages · Íris</p>
+      <div id="convSteps"></div>
+    </div>
   </div>
+
+  <!-- ROW: Vendedoras + Motivos de perda -->
   <div class="row4">
     <div class="card">
-      <p class="card-title">Motivos de perda</p>
-      <div style="position:relative;width:100%;height:150px;"><canvas id="perdidosChart" role="img" aria-label="Motivos de perda">Carregando...</canvas></div>
+      <p class="card-title">Vendedoras · performance completa</p>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;">
+        <!-- IRIS -->
+        <div>
+          <div class="vcard-top">
+            <div class="avatar" style="background:#534AB7;color:#fff;">IR</div>
+            <div><p class="vname">Íris</p><span class="vtag vtag-main">Laser · foco principal</span></div>
+          </div>
+          <div class="vrow"><span class="vk">Leads ativos</span><span class="vv">118</span></div>
+          <div class="vrow"><span class="vk">Em orçamento</span><span class="vv">26</span></div>
+          <div class="vrow"><span class="vk">Pipeline aberto</span><span class="vv" style="color:#534AB7;">R$262,7K</span></div>
+          <div class="vrow"><span class="vk">Leads perdidos</span><span class="vv" style="color:#A32D2D;">33</span></div>
+          <div class="vdivider"></div>
+          <p class="vsection">Vendas ganhas</p>
+          <div class="vrow"><span class="vk">Quantidade</span><span class="vv">11 vendas</span></div>
+          <div class="vrow"><span class="vk">Ticket médio</span><span class="vv">R$4.079</span></div>
+          <div class="receita-box">
+            <p class="receita-lbl">Receita ganha</p>
+            <p class="receita-val">R$44.867</p>
+          </div>
+        </div>
+        <!-- ELAINE -->
+        <div>
+          <div class="vcard-top">
+            <div class="avatar" style="background:#f0f0ee;color:#666;">EL</div>
+            <div><p class="vname">Elaine</p><span class="vtag vtag-sec">Gel · secundário</span></div>
+          </div>
+          <div class="vrow"><span class="vk">Leads ativos</span><span class="vv">29</span></div>
+          <div class="vrow"><span class="vk">Em orçamento</span><span class="vv">29</span></div>
+          <div class="vrow"><span class="vk">Pipeline aberto</span><span class="vv">R$10,0K</span></div>
+          <div class="vrow"><span class="vk">Leads perdidos</span><span class="vv">—</span></div>
+          <div class="vdivider"></div>
+          <p class="vsection">Vendas ganhas</p>
+          <div class="vrow"><span class="vk">Quantidade</span><span class="vv">58 vendas</span></div>
+          <div class="vrow"><span class="vk">Ticket médio</span><span class="vv">R$323</span></div>
+          <div class="receita-box" style="background:#f0f0ee;">
+            <p class="receita-lbl" style="color:#6b6b68;">Receita ganha</p>
+            <p class="receita-val" style="color:#1a1a1a;">R$18.735</p>
+          </div>
+        </div>
+      </div>
     </div>
-    <div class="card" style="display:flex;flex-direction:column;">
-      <p class="card-title">Conversão entre stages</p>
-      <div id="convSteps" style="flex:1;"></div>
+
+    <div class="card">
+      <p class="card-title">Motivos de perda · 33 leads perdidos</p>
+      <div style="position:relative;width:100%;height:160px;margin-bottom:16px;"><canvas id="perdidosChart"></canvas></div>
+      <div class="vdivider"></div>
+      <p class="vsection" style="margin-top:12px;">Resumo de receita</p>
+      <div class="summary-row"><span class="summary-k">Receita total ganha</span><span class="summary-v" style="color:#0F6E56;">R$63.602</span></div>
+      <div class="summary-row"><span class="summary-k">Pipeline Íris em aberto</span><span class="summary-v" style="color:#534AB7;">R$262.720</span></div>
+      <div class="summary-row"><span class="summary-k">Ticket médio Íris</span><span class="summary-v">R$4.079</span></div>
+      <div class="summary-row"><span class="summary-k">Ticket médio Elaine</span><span class="summary-v">R$323</span></div>
+      <div class="summary-row"><span class="summary-k">Total vendas ganhas</span><span class="summary-v">69</span></div>
     </div>
   </div>
-  <div class="alert-box" id="alertBox" style="display:none;">
-    <div><p class="alert-title" id="alertTitle"></p><p class="alert-text" id="alertText"></p></div>
+
+  <!-- ALERT -->
+  <div class="alert-box">
+    <div>
+      <p class="alert-title">Gargalo crítico — 77 leads ignorados (60% dos leads da Íris)</p>
+      <p class="alert-text">R$163.450 parado no stage "Lead Ignorou". O motivo de perda mais comum é "não quer comprar agora" (13 leads) — seguido de "está sem dinheiro" (10). Follow-up estruturado resolve.</p>
+    </div>
     <button class="alert-btn" onclick="window.open('https://app.gohighlevel.com','_blank')">Abrir GHL ↗</button>
   </div>
+
 </div>
+
 <script>
-const CONFIG = {
-  token: 'pit-2786fa1e-37e3-4f84-82e8-563a62d44a7a',
-  locationId: 'DWe3MaUbkceDMaiX5341',
-  baseUrl: 'https://services.leadconnectorhq.com',
-  userNames: {},
-  products: ['Smile Hand', 'ILIB', 'Colors', 'Gel'],
-  productColors: { 'Smile Hand': '#534AB7', 'ILIB': '#0F6E56', 'Colors': '#EF9F27', 'Gel': '#185FA5', 'Outros': '#B4B2A9' },
-};
-let allOpportunities = [], stageMap = {}, pipelineMap = {}, charts = {}, currentDays = 30;
-function fmtBRL(v) { if (v >= 1000000) return 'R$'+(v/1000000).toFixed(1)+'M'; if (v >= 1000) return 'R$'+(v/1000).toFixed(1)+'K'; return 'R$'+Math.round(v).toLocaleString('pt-BR'); }
-function setLoader(pct, msg) { document.getElementById('loaderFill').style.width = pct+'%'; document.getElementById('loadingMsg').textContent = msg; }
-function detectProduct(name = '') { const n = name.toLowerCase(); for (const p of CONFIG.products) { if (n.includes(p.toLowerCase())) return p; } return 'Outros'; }
-function getFilteredOpps() { if (currentDays === 0) return allOpportunities; const cutoff = Date.now() - currentDays * 86400000; return allOpportunities.filter(o => { const ts = o.createdAt ? new Date(o.createdAt).getTime() : 0; return ts >= cutoff; }); }
-async function ghlFetch(path) {
-  const res = await fetch(CONFIG.baseUrl + path, { headers: { 'Authorization': 'Bearer ' + CONFIG.token, 'Version': '2021-07-28', 'Content-Type': 'application/json' } });
-  if (!res.ok) throw new Error('HTTP ' + res.status + ' — ' + path);
-  return res.json();
-}
-async function fetchAllOpportunities() {
-  let opps = [], startAfterId = null, page = 1;
-  while (true) {
-    const url = `/opportunities/search?location_id=${CONFIG.locationId}&limit=100${startAfterId ? '&startAfterId=' + startAfterId : ''}`;
-    const data = await ghlFetch(url);
-    const raw = data.opportunities || [];
-    const batch = raw.filter(o => !o.locationId || o.locationId === CONFIG.locationId);
-    opps = opps.concat(batch);
-    setLoader(30 + Math.min(40, page * 8), `Carregando oportunidades... (${opps.length})`);
-    if (raw.length < 100) break;
-    startAfterId = raw[raw.length - 1].id;
-    page++; if (page > 20) break;
-  }
-  return opps;
-}
-async function fetchPipelines() {
-  const data = await ghlFetch(`/opportunities/pipelines?locationId=${CONFIG.locationId}`);
-  const all = data.pipelines || [];
-  return all.filter(p => !p.locationId || p.locationId === CONFIG.locationId);
-}
-async function loadData() {
-  document.getElementById('loadingScreen').style.display = 'flex';
-  document.getElementById('dashboard').style.display = 'none';
-  document.getElementById('errorScreen').style.display = 'none';
-  try {
-    setLoader(10, 'Buscando pipelines...');
-    const pipelines = await fetchPipelines();
-    stageMap = {}; pipelineMap = {};
-    let order = 0;
-    pipelines.forEach(pl => { pipelineMap[pl.id] = pl.name; (pl.stages || []).forEach(st => { stageMap[st.id] = { name: st.name, order: order++, pipelineId: pl.id }; }); });
-    setLoader(30, 'Buscando oportunidades...');
-    allOpportunities = await fetchAllOpportunities();
-    setLoader(80, 'Processando dados...');
-    renderDashboard();
-    setLoader(100, 'Pronto!');
-    setTimeout(() => { document.getElementById('loadingScreen').style.display = 'none'; document.getElementById('dashboard').style.display = 'block'; }, 400);
-    document.getElementById('updatedAt').textContent = 'Atualizado ' + new Date().toLocaleTimeString('pt-BR', {hour:'2-digit',minute:'2-digit'});
-  } catch (err) {
-    document.getElementById('loadingScreen').style.display = 'none';
-    document.getElementById('errorScreen').style.display = 'flex';
-    document.getElementById('errorDetail').textContent = err.message;
-  }
-}
-function renderDashboard() {
-  const opps = getFilteredOpps();
-  const open = opps.filter(o => o.status === 'open');
-  const won = opps.filter(o => o.status === 'won');
-  const lost = opps.filter(o => o.status === 'lost');
-  const pipelineVal = open.reduce((s, o) => s + (o.monetaryValue || 0), 0);
-  const wonVal = won.reduce((s, o) => s + (o.monetaryValue || 0), 0);
-  const txConv = opps.length > 0 ? (won.length / opps.length * 100) : 0;
-  const stageCounts = {}, stageVals = {};
-  open.forEach(o => { const sid = o.pipelineStageId; stageCounts[sid] = (stageCounts[sid] || 0) + 1; stageVals[sid] = (stageVals[sid] || 0) + (o.monetaryValue || 0); });
-  let ignorouCount = 0, ignorouStageId = null;
-  Object.keys(stageCounts).forEach(sid => { const name = (stageMap[sid]?.name || '').toLowerCase(); if (name.includes('ignor')) { ignorouCount += stageCounts[sid]; ignorouStageId = sid; } });
-  document.getElementById('kpiPipeline').textContent = fmtBRL(pipelineVal);
-  document.getElementById('kpiPipelineSub').textContent = open.length + ' oportunidades abertas';
-  document.getElementById('kpiLeads').textContent = opps.length;
-  document.getElementById('kpiLeadsSub').textContent = open.length + ' abertas · ' + lost.length + ' perdidas';
-  document.getElementById('kpiGanhas').textContent = wonVal > 0 ? fmtBRL(wonVal) : 'R$0';
-  document.getElementById('kpiGanhasSub').textContent = won.length + ' venda(s) fechada(s)';
-  document.getElementById('kpiIgnorou').textContent = ignorouCount;
-  document.getElementById('kpiIgnorouSub').textContent = opps.length > 0 ? (ignorouCount/opps.length*100).toFixed(0)+'% dos leads' : '—';
-  document.getElementById('kpiConv').textContent = txConv.toFixed(1)+'%';
-  const badge = document.getElementById('dataBadge');
-  badge.className = won.length === 0 ? 'badge badge-warn' : 'badge badge-ok';
-  badge.textContent = won.length === 0 ? 'Ganhas não registradas' : won.length + ' venda(s) ganha(s)';
-  renderFunnel(stageCounts, stageVals, open.length, won.length, opps.length, ignorouStageId);
-  renderValorChart(stageVals, ignorouStageId);
-  renderOrigemChart(opps); renderProdutoChart(opps);
-  renderVendedoras(opps, won); renderPerdidosChart(lost); renderConvSteps(stageCounts);
-  const alertBox = document.getElementById('alertBox');
-  if (ignorouCount > 0) {
-    alertBox.style.display = 'flex';
-    document.getElementById('alertTitle').textContent = 'Gargalo crítico — ' + ignorouCount + ' leads ignorados (' + (opps.length > 0 ? (ignorouCount/opps.length*100).toFixed(0) : 0) + '% do pipeline)';
-    document.getElementById('alertText').textContent = 'Com ' + fmtBRL(pipelineVal) + ' em aberto, resolver o follow-up aqui é a maior alavanca de resultado agora.';
-  } else { alertBox.style.display = 'none'; }
-}
-function renderFunnel(stageCounts, stageVals, totalOpen, wonCount, totalAll, ignorouStageId) {
-  const sorted = Object.keys(stageCounts).map(sid => ({ sid, name: stageMap[sid]?.name || sid, count: stageCounts[sid], order: stageMap[sid]?.order ?? 99 })).sort((a, b) => a.order - b.order);
-  const maxCount = Math.max(...sorted.map(s => s.count), 1);
-  const COLORS = ['#85B7EB','#7F77DD','#E24B4A','#534AB7','#7F77DD','#1D9E75','#0F6E56','#EF9F27'];
-  document.getElementById('funnelWrap').innerHTML = sorted.map((s, i) => { const pct = (s.count/maxCount*100).toFixed(0); const isAlert = s.sid === ignorouStageId; return `<div class="funnel-row"><div class="funnel-meta"><span class="funnel-lbl ${isAlert?'alert':''}">${s.name}</span><span class="funnel-num">${s.count}</span></div><div class="funnel-track"><div class="funnel-fill" style="width:${pct}%;background:${isAlert?'#E24B4A':COLORS[i%COLORS.length]};"></div></div></div>`; }).join('');
-  document.getElementById('txGeral').textContent = totalAll > 0 ? (wonCount/totalAll*100).toFixed(1)+'%' : '—';
-}
-function renderValorChart(stageVals, ignorouStageId) {
-  const entries = Object.entries(stageVals).map(([sid, val]) => ({ name: stageMap[sid]?.name || sid, val, isIgnorou: sid === ignorouStageId, order: stageMap[sid]?.order ?? 99 })).filter(e => e.val > 0).sort((a, b) => b.val - a.val).slice(0, 7);
-  const colors = entries.map(e => e.isIgnorou ? '#E24B4A' : e.val > 50000 ? '#534AB7' : e.val > 20000 ? '#185FA5' : '#85B7EB');
-  if (charts.valor) charts.valor.destroy();
-  charts.valor = new Chart(document.getElementById('valorChart'), { type: 'bar', indexAxis: 'y', data: { labels: entries.map(e => e.name), datasets: [{ data: entries.map(e => e.val), backgroundColor: colors, borderRadius: 5 }] }, options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { display: false }, tooltip: { callbacks: { label: c => ' ' + fmtBRL(c.raw) } } }, scales: { x: { grid: { color: 'rgba(0,0,0,0.04)' }, ticks: { font: { size: 10 }, color: '#888', callback: v => fmtBRL(v) } }, y: { grid: { display: false }, ticks: { font: { size: 11 }, color: '#888' } } } } });
-}
-function renderOrigemChart(opps) {
-  const counts = {}; opps.forEach(o => { const src = o.source || 'Sem origem'; counts[src] = (counts[src] || 0) + 1; });
-  const entries = Object.entries(counts).sort((a,b) => b[1]-a[1]).slice(0, 6);
-  const COLORS = ['#534AB7','#0F6E56','#EF9F27','#185FA5','#E24B4A','#85B7EB'];
-  const total = entries.reduce((s,e)=>s+e[1], 0);
-  if (charts.origem) charts.origem.destroy();
-  charts.origem = new Chart(document.getElementById('origemChart'), { type: 'doughnut', data: { labels: entries.map(e=>e[0]), datasets: [{ data: entries.map(e=>e[1]), backgroundColor: COLORS.slice(0,entries.length), borderWidth: 0, hoverOffset: 6 }] }, options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { display: false } }, cutout: '68%' } });
-  document.getElementById('origemLegend').innerHTML = entries.map((e,i) => `<span class="legend-item"><span class="legend-dot" style="background:${COLORS[i]};"></span>${e[0]} ${total>0?(e[1]/total*100).toFixed(0):0}%</span>`).join('');
-}
-function renderProdutoChart(opps) {
-  const counts = {}; opps.forEach(o => { const p = detectProduct(o.name || ''); counts[p] = (counts[p] || 0) + 1; });
-  const entries = Object.entries(counts).sort((a,b)=>b[1]-a[1]);
-  const colors = entries.map(e => CONFIG.productColors[e[0]] || '#B4B2A9');
-  const total = entries.reduce((s,e)=>s+e[1], 0);
-  if (charts.produto) charts.produto.destroy();
-  charts.produto = new Chart(document.getElementById('produtoChart'), { type: 'doughnut', data: { labels: entries.map(e=>e[0]), datasets: [{ data: entries.map(e=>e[1]), backgroundColor: colors, borderWidth: 0, hoverOffset: 6 }] }, options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { display: false } }, cutout: '68%' } });
-  document.getElementById('produtoLegend').innerHTML = entries.map((e,i) => `<span class="legend-item"><span class="legend-dot" style="background:${colors[i]};"></span>${e[0]} ${total>0?(e[1]/total*100).toFixed(0):0}%</span>`).join('');
-}
-function renderVendedoras(opps, won) {
-  const userOpps = {};
-  opps.forEach(o => { const uid = o.assignedTo || 'sem_usuario'; if (!userOpps[uid]) userOpps[uid] = { opps: [], won: [] }; userOpps[uid].opps.push(o); });
-  won.forEach(o => { const uid = o.assignedTo || 'sem_usuario'; if (!userOpps[uid]) userOpps[uid] = { opps: [], won: [] }; userOpps[uid].won.push(o); });
-  const users = Object.entries(userOpps).sort((a,b) => b[1].opps.length - a[1].opps.length);
-  const AV_COLORS = ['background:#534AB7;color:#fff;','background:#f0f0ee;color:#666;','background:#0F6E56;color:#fff;','background:#EF9F27;color:#fff;'];
-  const wrap = document.getElementById('vendedorasWrap');
-  if (users.length === 0) { wrap.innerHTML = '<p class="no-data">Nenhum dado encontrado</p>'; return; }
-  wrap.innerHTML = users.map(([uid, data], i) => {
-    const name = CONFIG.userNames[uid] || ('Usuário ' + (i+1));
-    const initials = name.substring(0,2).toUpperCase();
-    const openOpps = data.opps.filter(o => o.status === 'open');
-    const wonOpps = data.won;
-    const pipeline = openOpps.reduce((s,o)=>s+(o.monetaryValue||0),0);
-    const wonTotal = wonOpps.reduce((s,o)=>s+(o.monetaryValue||0),0);
-    const inOrc = openOpps.filter(o => { const n = (stageMap[o.pipelineStageId]?.name || '').toLowerCase(); return n.includes('orç') || n.includes('orc') || n.includes('aguard') || n.includes('fecha'); }).length;
-    const prodWon = {};
-    wonOpps.forEach(o => { const p = detectProduct(o.name || ''); if (!prodWon[p]) prodWon[p] = { count: 0, val: 0 }; prodWon[p].count++; prodWon[p].val += (o.monetaryValue || 0); });
-    const prodEntries = Object.entries(prodWon).sort((a,b)=>b[1].val-a[1].val);
-    return `<div class="vcard"><div class="vcard-top"><div class="avatar" style="${AV_COLORS[i]||AV_COLORS[0]}">${initials}</div><div><p class="vname">${name}</p><span class="vtag ${i===0?'vtag-main':'vtag-sec'}">${i===0?'Laser · foco principal':'Vendedora'}</span></div></div><div class="vrow"><span class="vk">Leads ativos</span><span class="vv">${openOpps.length}</span></div><div class="vrow"><span class="vk">Em orçamento / fechamento</span><span class="vv">${inOrc}</span></div><div class="vrow"><span class="vk">Pipeline aberto</span><span class="vv" style="color:#534AB7;">${fmtBRL(pipeline)}</span></div>${wonOpps.length > 0 ? `<div class="vdivider"></div><p class="vsection">Vendas ganhas</p>${prodEntries.map(([p,d])=>`<div class="prod-row"><span class="prod-name"><span class="prod-dot" style="background:${CONFIG.productColors[p]||'#B4B2A9'};"></span>${p}</span><span class="prod-val">${fmtBRL(d.val)} <span class="prod-qty">(${d.count} venda${d.count>1?'s':''})</span></span></div>`).join('')}<div class="receita-box"><p class="receita-lbl">Receita ganha</p><p class="receita-val">${fmtBRL(wonTotal)}</p></div>` : `<div class="vdivider"></div><p style="font-size:11px;color:#9b9b97;text-align:center;padding:8px 0;">Nenhuma venda registrada como ganha ainda</p>`}</div>`;
-  }).join('');
-}
-function renderPerdidosChart(lost) {
-  const counts = {}; lost.forEach(o => { const r = o.lostReason || 'Sem motivo'; counts[r] = (counts[r] || 0) + 1; });
-  const entries = Object.entries(counts).sort((a,b)=>b[1]-a[1]).slice(0,6);
-  if (entries.length === 0) { document.getElementById('perdidosChart').parentElement.innerHTML = '<p class="no-data">Nenhuma oportunidade perdida no período</p>'; return; }
-  if (charts.perdidos) charts.perdidos.destroy();
-  charts.perdidos = new Chart(document.getElementById('perdidosChart'), { type: 'bar', indexAxis: 'y', data: { labels: entries.map(e=>e[0]), datasets: [{ data: entries.map(e=>e[1]), backgroundColor: ['#A32D2D','#E24B4A','#F09595','#F7C1C1','#FCEBEB','#fef2f2'].slice(0,entries.length), borderRadius: 5 }] }, options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { display: false } }, scales: { x: { grid: { color: 'rgba(0,0,0,0.04)' }, ticks: { font: { size: 10 }, color: '#888' } }, y: { grid: { display: false }, ticks: { font: { size: 11 }, color: '#888' } } } } });
-}
-function renderConvSteps(stageCounts) {
-  const sorted = Object.keys(stageCounts).map(sid => ({ name: stageMap[sid]?.name || sid, count: stageCounts[sid], order: stageMap[sid]?.order ?? 99 })).sort((a,b) => a.order - b.order).filter(s => s.count > 0);
-  const COLORS = ['#534AB7','#7F77DD','#0F6E56','#1D9E75','#EF9F27','#185FA5'];
-  const cs = document.getElementById('convSteps'); cs.innerHTML = '';
-  for (let i = 0; i < sorted.length - 1; i++) { const from = sorted[i], to = sorted[i+1]; const pct = from.count > 0 ? Math.min(100, (to.count/from.count*100)) : 0; cs.innerHTML += `<div class="conv-row"><div class="conv-meta"><span class="conv-lbl">${from.name} → ${to.name}</span><span class="conv-pct" style="color:${COLORS[i%COLORS.length]};">${pct.toFixed(0)}%</span></div><div class="conv-track"><div class="conv-fill" style="width:${pct}%;background:${COLORS[i%COLORS.length]};"></div></div></div>`; }
-  if (!cs.innerHTML) cs.innerHTML = '<p class="no-data">Dados insuficientes</p>';
-}
-function filterByPeriod(days) { currentDays = parseInt(days); renderDashboard(); }
-loadData();
+// FUNIL IRIS
+const funil = [
+  {l:'Entrada', v:1, c:'#85B7EB'},
+  {l:'Lead Ignorou', v:77, alert:true},
+  {l:'Lead Engajado', v:14, c:'#7F77DD'},
+  {l:'Orçamento Enviado', v:17, c:'#534AB7'},
+  {l:'Aguardando Resposta', v:9, c:'#1D9E75'},
+  {l:'Vendas (Ganhas)', v:11, c:'#0F6E56'},
+];
+const maxV = Math.max(...funil.map(s=>s.v));
+const fw = document.getElementById('funnelWrap');
+funil.forEach(s => {
+  const pct = (s.v/maxV*100).toFixed(0);
+  const color = s.alert ? '#E24B4A' : (s.c||'#534AB7');
+  fw.innerHTML += `<div class="funnel-row"><div class="funnel-meta"><span class="funnel-lbl ${s.alert?'alert':''}">${s.l}</span><span class="funnel-num">${s.v}</span></div><div class="funnel-track"><div class="funnel-fill" style="width:${pct}%;background:${color};"></div></div></div>`;
+});
+
+// VALOR POR STAGE IRIS
+new Chart(document.getElementById('valorChart'),{
+  type:'bar', indexAxis:'y',
+  data:{
+    labels:['Lead Ignorou','Orç. Enviado','Aguardando','Lead Engajado','Entrada'],
+    datasets:[{data:[163450,53120,35970,5090,5090],backgroundColor:['#E24B4A','#534AB7','#1D9E75','#7F77DD','#85B7EB'],borderRadius:5}]
+  },
+  options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false},tooltip:{callbacks:{label:c=>' R$'+c.raw.toLocaleString('pt-BR')}}},scales:{x:{grid:{color:'rgba(0,0,0,0.04)'},ticks:{font:{size:10},color:'#888',callback:v=>'R$'+(v/1000).toFixed(0)+'k'}},y:{grid:{display:false},ticks:{font:{size:11},color:'#888'}}}}
+});
+
+// EVOLUÇÃO MENSAL
+new Chart(document.getElementById('evolucaoChart'),{
+  type:'bar',
+  data:{
+    labels:['Mar/26','Abr/26','Mai/26*'],
+    datasets:[
+      {label:'Leads',data:[70,98,19],backgroundColor:'#B5D4F4',borderRadius:4,yAxisID:'y'},
+      {label:'Ganhas',data:[11,52,6],backgroundColor:'#0F6E56',borderRadius:4,yAxisID:'y'},
+    ]
+  },
+  options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false},tooltip:{mode:'index'}},scales:{x:{grid:{display:false},ticks:{font:{size:11},color:'#888'}},y:{grid:{color:'rgba(0,0,0,0.04)'},ticks:{font:{size:10},color:'#888'}}}}
+});
+
+// ORIGEM
+new Chart(document.getElementById('origemChart'),{
+  type:'doughnut',
+  data:{labels:['Instagram','Facebook','Meta Ads'],datasets:[{data:[106,11,7],backgroundColor:['#534AB7','#EF9F27','#0F6E56'],borderWidth:0,hoverOffset:6}]},
+  options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false}},cutout:'68%'}
+});
+
+// MOTIVOS DE PERDA
+new Chart(document.getElementById('perdidosChart'),{
+  type:'bar', indexAxis:'y',
+  data:{
+    labels:['Não quer comprar agora','Sem dinheiro no momento','Comprou de outra marca','Sem urgência'],
+    datasets:[{data:[13,10,5,1],backgroundColor:['#A32D2D','#E24B4A','#F09595','#F7C1C1'],borderRadius:5}]
+  },
+  options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false}},scales:{x:{grid:{color:'rgba(0,0,0,0.04)'},ticks:{font:{size:10},color:'#888'}},y:{grid:{display:false},ticks:{font:{size:10},color:'#888'}}}}
+});
+
+// CONVERSÃO IRIS
+const convData = [
+  {from:'Entrada → Lead Ignorou', pct:100, c:'#E24B4A'},
+  {from:'Ignorou → Lead Engajado', pct:18, c:'#7F77DD'},
+  {from:'Lead Engajado → Orç. Enviado', pct:121, c:'#534AB7'},
+  {from:'Orç. Enviado → Aguardando', pct:53, c:'#1D9E75'},
+  {from:'Aguardando → Vendas (Ganhas)', pct:122, c:'#0F6E56'},
+];
+const cs = document.getElementById('convSteps');
+convData.forEach(c => {
+  const bar = Math.min(100, c.pct);
+  cs.innerHTML += `<div class="conv-row"><div class="conv-meta"><span class="conv-lbl">${c.from}</span><span class="conv-pct" style="color:${c.c};">${c.pct}%</span></div><div class="conv-track"><div class="conv-fill" style="width:${bar}%;background:${c.c};"></div></div></div>`;
+});
 </script>
 </body>
 </html>
